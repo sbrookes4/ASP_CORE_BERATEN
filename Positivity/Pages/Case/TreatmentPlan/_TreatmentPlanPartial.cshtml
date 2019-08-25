@@ -1,0 +1,84 @@
+﻿@model TreatmentPlan
+@inject BeratenHealthcareDataInterfaceLib.ITreatmentPlan TreatmentPlanMan
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CaseIntakeId" />
+        <div class="row">
+            <div class="col-md-3">
+                <span>Plan Date</span><span asp-validation-for="PlanDate" class="text-danger"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="PlanDate" class="form-control" style='width: 100%;' />
+            </div>
+            <div class="col-md-3">
+                <span>Plan Time</span><span asp-validation-for="PlanTime" class="text-danger"></span>
+                <kendo-timepicker for="PlanTime" class="form-control" style='width: 100%;' />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <span>Length Of Treatment</span><span asp-validation-for="LengthOfTreatment" class="text-danger"></span>
+                <input type="text" asp-for="LengthOfTreatment" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <span>Plan Name</span><span asp-validation-for="PlanName" class="text-danger"></span>
+                <input type="text" asp-for="PlanName" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Attending Staff Names</span><span asp-validation-for="AttendingStaffArray"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.AttendingStaffArray).BindTo(TreatmentPlanMan.GetAllStaff().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+            <div class="col-md-9">
+                <span>Attending Client Family Names</span><span asp-validation-for="AttendingClientFamilyNames"></span>
+                <textarea asp-for="AttendingClientFamilyNames" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9">
+                <span>Problems</span><span asp-validation-for="Problems" class="text-danger"></span>
+                <textarea asp-for="Problems" class="form-control" style="height:100px;"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Strengths</span><span asp-validation-for="Strengths" class="text-danger"></span>
+                <textarea asp-for="Strengths" class="form-control" style="height:100px;"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <span>Date Supervisor Signed</span><span asp-validation-for="DateSupervisorSigned" class="text-danger"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="DateSupervisorSigned" class="form-control" style='width: 100%;' />
+            </div>
+            <div class="col-md-3">
+                <span>Date Client Signed</span><span asp-validation-for="DateClientSigned" class="text-danger"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="DateClientSigned" class="form-control" style='width: 100%;' />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9">
+                <span>Reason For No Client Sign</span><span asp-validation-for="ReasonForNoClientSign" class="text-danger"></span>
+                <textarea asp-for="ReasonForNoClientSign" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div> &nbsp;</div>
+                <label class="control-checkbox">
+                    <span>Mark as completed. (And lock this Plan as Read Only)</span>
+                    <input type="checkbox" />
+                    <div class="checkbox-label"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" asp-for="RecordedBy" value="@User.Identity.Name" />
+    <input type="hidden" asp-for="RecordedOn" value="@System.DateTime.Now" />
+</div>

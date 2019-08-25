@@ -1,0 +1,29 @@
+﻿@page "{CaseIntakeId}"
+
+@model Positivity.Pages.Case.Assessments.CreateMentalHealthAssessmentModel
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "Assessments", CaseId = Model.MentalHealthAssessmentData.CaseIntakeId }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = Model.MentalHealthAssessmentData.CaseIntakeId })
+
+@Html.Partial("Common/_PageTitlePartial", "Mental Health Assessment")
+
+@{ViewData["Title"] = "Create";}
+
+<form method="post">
+
+    @Html.Partial("_MentalHealthAssessmentPartial", Model.MentalHealthAssessmentData)
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <input type="submit" value="Save" class="btn btn-blueTwo" />
+                    <a href="@Navigator.MentalHealthAssessmentList/@Model.MentalHealthAssessmentData.CaseIntakeId" class="btn btn-sliverOne">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }}

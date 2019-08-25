@@ -1,0 +1,126 @@
+﻿@page "{treatmentPlanId}"
+
+@model Positivity.Pages.Case.TreatmentPlan.ViewTreatmentPlanModel
+
+@{ViewData["Title"] = "View Treatment Plan";}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "TreatmentPlans", CaseId = 1 }); }}
+
+    @await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = 1 })
+
+
+@Html.Partial("Common/_PageTitlePartial", "View Treatment Plan")
+
+
+<div class="panel panel-body">
+
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Plan Name</label>
+            <p>@Model.TreatmentPlanData.PlanName</p>
+
+        </div>
+
+        <div class="col-md-3">
+            <label>Plan Date</label>
+            <p>@Model.TreatmentPlanData.PlanDate</p>
+
+        </div>
+
+        <div class="col-md-3">
+            <label>Plan Time</label>
+            <p>@Model.TreatmentPlanData.PlanTime</p>
+        </div>
+
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Length of Treatment</label>
+            <p>@Model.TreatmentPlanData.LengthOfTreatment</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Attending Staff Names</label>
+            <p>@Model.TreatmentPlanData.AttendingStaffNames</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Attending Client Family Names</label>
+            <p>@Model.TreatmentPlanData.AttendingStaffNames</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Problems</label>
+            <p>@Model.TreatmentPlanData.Problems</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Strengths</label>
+            <p>@Model.TreatmentPlanData.Strengths</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Date Supervisor Signed</label>
+            <p>@Model.TreatmentPlanData.DateSupervisorSigned</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Date Client Signed</label>
+            <p>@Model.TreatmentPlanData.DateClientSigned</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Reason For No Client Sign</label>
+            <p>@Model.TreatmentPlanData.ReasonForNoClientSign</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+
+</div>
+
+

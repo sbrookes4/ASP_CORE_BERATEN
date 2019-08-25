@@ -1,0 +1,31 @@
+﻿@page "{AssessmentId}"
+
+@model Positivity.Pages.Case.Assessments.UpdateMentalHealthAssessmentModel
+
+@{ViewData["Title"] = "Update";}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "Assessments", CaseId = Model.MentalHealthAssessmentData.CaseIntakeId }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = Model.MentalHealthAssessmentData.CaseIntakeId })
+
+@Html.Partial("Common/_PageTitlePartial", "Edit Mental Health Assessment")
+
+<form method="post">
+
+    @Html.Partial("_MentalHealthAssessmentPartial", Model.MentalHealthAssessmentData)
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <span>Recorded By: </span> <label>@Model.MentalHealthAssessmentData.RecordedBy </label>
+                    <span>Recorded On: </span> <label>@Model.MentalHealthAssessmentData.RecordedOn.ToShortDateString()</label>
+                </div>
+                <div class="col-md-4 text-right">
+                    <input type="submit" value="Update" class="btn btn-blueTwo" />
+                    <a href="@Navigator.MentalHealthAssessmentList/@Model.MentalHealthAssessmentData.Id" class="btn btn-sliverOne">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

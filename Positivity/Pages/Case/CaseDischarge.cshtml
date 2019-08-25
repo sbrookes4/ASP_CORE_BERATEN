@@ -1,0 +1,134 @@
+﻿@page "{caseIntakeId}"
+
+@model Positivity.Pages.Case.CaseDischargeModel
+
+@inject BeratenHealthcareDataInterfaceLib.ILookup LookupMan
+
+@{ViewData["Title"] = "Discharge";}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "CaseDischarge", CaseId = Model.CaseDischargeData.CaseIntakeId }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = Model.CaseDischargeData.CaseIntakeId })
+
+@{ string userRole = User.Claims.FirstOrDefault(s => s.Type == System.Security.Claims.ClaimTypes.Role).Value;}
+
+@Html.Partial("Common/_PageTitlePartial", "Case Discharge")
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <input type="hidden" asp-for="CaseDischargeData.CaseIntakeId" />
+            <div class="row">
+                <div class="col-md-3">
+                    <span>Date</span><span asp-validation-for="CaseDischargeData.DischargeDate"></span>
+                    <kendo-datepicker max="@DateTime.Now" for="CaseDischargeData.DischargeDate" class="form-control" style='width: 100%;' />
+                </div>
+                <div class="col-md-3">
+                    <span>Time</span><span asp-validation-for="CaseDischargeData.DischargeTime"></span>
+                    <kendo-timepicker max="@DateTime.Now" for="CaseDischargeData.DischargeTime" class="form-control" style='width: 100%;' />
+                </div>
+                <div class="col-md-3">
+                    <span>Discharge Reason</span> <span asp-validation-for="CaseDischargeData.DischareReasonLookupId"></span>
+                    <select asp-for="CaseDischargeData.DischareReasonLookupId" onchange="DischareReasonChange();" id="DischareReasonLookupId"
+                            asp-items="@LookupMan.GetDischareReasonList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString() })"
+                            class="form-control">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+            <div id="transferredPanel">
+                <div class="row">
+                    <div class="col-md-9">
+                        <span>Transferred To</span><span asp-validation-for="CaseDischargeData.TransferredTo"></span>
+                        <input type="text" asp-for="CaseDischargeData.TransferredTo" class="form-control" maxlength="200" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <span>Contact Information</span><span asp-validation-for="CaseDischargeData.ContactInfo"></span>
+                        <textarea asp-for="CaseDischargeData.ContactInfo" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <span>Transferred Date</span><span asp-validation-for="CaseDischargeData.TransferredDate"></span>
+                        <kendo-datepicker max="@DateTime.Now" for="CaseDischargeData.TransferredDate" class="form-control" style='width: 100%;' />
+                    </div>
+                    <div class="col-md-3">
+                        <span>Phone</span><span asp-validation-for="CaseDischargeData.Phone"></span>
+                        @(Html.Kendo().MaskedTextBoxFor(Model => Model.CaseDischargeData.Phone).HtmlAttributes(new { @class = "form-control" }).Mask("(999) 000-0000") )
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <span>Discharge Recommendation</span><span asp-validation-for="CaseDischargeData.DischargeRecommendation"></span>
+                    <textarea asp-for="CaseDischargeData.DischargeRecommendation" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <span>Possible Post Discharge Problems</span><span asp-validation-for="CaseDischargeData.PossiblePostDischargeProblems"></span>
+                    <textarea asp-for="CaseDischargeData.PossiblePostDischargeProblems" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <label class="control-checkbox">
+                        <span>Mark as completed. (And lock this Case Discharge as Read Only)</span>
+                        <input type="checkbox" asp-for="CaseDischargeData.IsCompleted" />
+                        <div class="checkbox-label"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" asp-for="CaseDischargeData.RecordedBy" value="@User.Identity.Name" />
+    <input type="hidden" asp-for="CaseDischargeData.RecordedOn" value="@System.DateTime.Now" />
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                @if (Model.CaseDischargeData.IsCompleted == true)
+                {
+                    <div class="col-md-3">
+                        <label>Completed By:</label> <span>@Model.CaseDischargeData.RecordedBy</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Completed On:</label> <span>@Model.CaseDischargeData.RecordedOn.ToString("MMM-dd-yyyy")</span>
+                    </div>
+                }
+                else
+                {
+
+                    <div class="col-md-12 text-right">
+                        @*@if (userRole == Roles.Supervisor.ToString())
+                            {*@
+                        <input type="submit" value="Save" class="btn btn-blueOne" />
+                        @* } *@
+                        <a href="@Navigator.UpdateCaseIntake/@Model.CaseDischargeData.CaseIntakeId" class="btn btn-sliverOne">Cancel</a>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }}
+
+<script>
+    DischareReasonChange();
+
+    function DischareReasonChange() {
+
+        if (document.getElementById('DischareReasonLookupId').value == 5) {
+
+            document.getElementById('transferredPanel').style.display = 'block';
+        }
+        else {
+
+            document.getElementById('transferredPanel').style.display = 'none';
+        }
+    }
+</script>

@@ -1,0 +1,158 @@
+﻿@model BeratenHealthcareModels.Coverage
+@inject BeratenHealthcareDataInterfaceLib.ILookup LookupMan
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>General Information</h3>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <span>Coverage Type</span><span asp-validation-for="CoverageType"></span>
+                <select class="form-control">
+                    <option></option>
+                    <option>Self</option>
+                    <option>Insurance</option>
+                    <option>Medicare</option>
+                    <option>Insurance Through Guardian</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <span>Coverage Rank</span><span asp-validation-for="CoverageRank"></span>
+                <select class="form-control">
+                    <option></option>
+                    <option>Primary</option>
+                    <option>Secondary</option>
+                    <option>Tritiary</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <span>Effective From</span><span asp-validation-for="EffectiveFrom"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="EffectiveFrom" class="form-control" style='width: 100%;' />
+            </div>
+
+            <div class="col-md-3">
+                <span>Effective Until</span><span asp-validation-for="EffectiveUntil"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="EffectiveUntil" class="form-control" style='width: 100%;' />
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <span>Plan Name</span><span asp-validation-for="PlanName"></span>
+                <input type="text" asp-for="PlanName" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <span>Group Number</span><span asp-validation-for="GroupNumber"></span>
+                <input type="text" asp-for="GroupNumber" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <span>Member Number</span><span asp-validation-for="MemberNumber"></span>
+                <input type="text" asp-for="MemberNumber" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <span>CoPay Amount</span><span asp-validation-for="CoPayAmount"></span>
+                <input type="text" asp-for="CoPayAmount" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <span>Contracted Rate With Insurer</span><span asp-validation-for="ContractedRateWithInsurer"></span>
+                <input type="text" asp-for="ContractedRateWithInsurer" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <span>Prior Authorization Number</span><span asp-validation-for="PriorAuthNumber"></span>
+                <input type="text" asp-for="PriorAuthNumber" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <span>Plan Subscriber Employer</span><span asp-validation-for="PlanSubscriberEmployer"></span>
+                <input type="text" asp-for="PlanSubscriberEmployer" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+                <span>Insurance Notes</span><span asp-validation-for="InsuranceNotes"></span>
+                <textarea type="text" asp-for="InsuranceNotes" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Medicaid Information</h3>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <span>Medicaid Number</span><span asp-validation-for="MedicaidNumber"></span>
+                <input type="text" asp-for="MedicaidNumber" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <span>Medicaid Worker</span><span asp-validation-for="MedicaidWorker"></span>
+                <input type="text" asp-for="MedicaidWorker" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <span>Eligibility Lookup Id</span><span asp-validation-for="EligibilityLookupId"></span>
+                <input type="number" asp-for="EligibilityLookupId" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <span>Medicaid Eligibility Notes</span><span asp-validation-for="MedicaidEligibilityNotes"></span>
+                <textarea type="text" asp-for="MedicaidEligibilityNotes" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Medicare Information</h3>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <span>Medicare Number</span><span asp-validation-for="MedicareNumber"></span>
+                <input type="text" asp-for="MedicareNumber" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <span>Medicare Phone Number</span><span asp-validation-for="MedicarePhone"></span>
+                <input type="text" asp-for="MedicarePhone" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <span>Medicare Notes</span><span asp-validation-for="MedicareNotes"></span>
+                <textarea type="text" asp-for="MedicareNotes" class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

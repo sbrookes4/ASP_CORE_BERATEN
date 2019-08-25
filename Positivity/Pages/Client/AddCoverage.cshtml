@@ -1,0 +1,29 @@
+﻿@page
+@model Positivity.Pages.Client.AddCoverageModel
+@{
+    ViewData["Title"] = "Add Coverage";
+}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_DashboardMenuPartial", new MenuModel { Identifier = "" }); }}
+
+@Html.Partial("Common/_PageTitlePartial", "Add Coverage")
+
+
+<form method="post">
+
+    @Html.Partial("_ClientCoveragePartial", Model.CoverageData)
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <input type="submit" value="Save" class="btn btn-blueTwo" asp-route-saveAndAdd="false" />
+                    <a href="https://www.google.com" class="btn btn-sliverOne">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts {@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }}

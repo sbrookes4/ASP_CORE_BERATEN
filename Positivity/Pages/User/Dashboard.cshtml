@@ -1,0 +1,19 @@
+﻿@page
+
+@model Positivity.Pages.User.DashboardModel
+
+@{ViewData["Title"] = "Dashboard";}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_DashboardMenuPartial", new MenuModel { Identifier = "Dashboard" }); }}
+
+@foreach (var widget in Model.UserWidgetsList)
+{
+    if (widget.IsMyStuff)
+    {
+        @await Component.InvokeAsync(widget.WidgetComponentId.ToString(), new { userId = ViewBag.UserId })
+    }
+    else
+    {
+        @await Component.InvokeAsync(widget.WidgetComponentId.ToString())
+    }
+}

@@ -1,0 +1,25 @@
+﻿@page "{appUserId}"
+@model Positivity.Pages.User.CreateUserWidgetModel
+
+@{ViewData["Title"] = "Add New User";}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_DashboardMenuPartial", new MenuModel { Identifier = "ManageUsers" }); }}
+
+<form method="post">
+
+    @Html.Partial("_WidgetPartial", Model.WidgetData)
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <input type="submit" value="Save" class="btn btn-blueTwo" />
+                    @*<a href="@Navigator.CreateAppUser/@Model.WidgetData.UserId" class="btn btn-sliverOne">Cancel</a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Html.Partial("_UsersWidgetsPartial", Model.UserWidgetsList)
+
+@section Scripts {@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }}

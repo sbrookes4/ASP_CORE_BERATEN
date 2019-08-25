@@ -1,0 +1,79 @@
+﻿@page
+
+@model Positivity.Pages.User.CreateAppUserModel
+
+@inject BeratenHealthcareDataInterfaceLib.ILookup LookupMan
+
+@{ViewData["Title"] = "Add New User";}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_DashboardMenuPartial", new MenuModel { Identifier = "ManageUsers" }); }}
+
+<form method="post">
+    <div class="panel panel-info">
+        <div class="panel-heading"><strong>Add New User</strong></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <span>First Name</span><span asp-validation-for="AppUserData.FirstName" class="text-danger"></span>
+                    <input type="text" asp-for="AppUserData.FirstName" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span>Last Name</span><span asp-validation-for="AppUserData.LastName" class="text-danger"></span>
+                    <input type="text" asp-for="AppUserData.LastName" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <div> &nbsp;</div>
+                    <label class="control-checkbox">
+                        <span>Is Active</span>
+                        <input type="checkbox" asp-for="AppUserData.IsActive" />
+                        <div class="checkbox-label"></div>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <span>Prefix</span><span asp-validation-for="AppUserData.Prefix" class="text-danger"></span>
+                    <input type="text" asp-for="AppUserData.Prefix" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span>Suffix</span><span asp-validation-for="AppUserData.Suffix" class="text-danger"></span>
+                    <input type="text" asp-for="AppUserData.Suffix" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span>Cell Phone</span><span asp-validation-for="AppUserData.CellPhone" class="text-danger"></span>
+                    @(Html.Kendo().MaskedTextBoxFor(Model => Model.AppUserData.CellPhone).HtmlAttributes(new { @class = "form-control" }).Mask("(999) 000-0000") )
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <lable>User Role</lable>
+                    <select id="AppRoleId" name="AppRoleId" class="form-control" asp-items="@Model.AppRolesList.Select(x=> new SelectListItem { Text = x.Description, Value = x.Id.ToString() } )"></select>
+                </div>
+
+                <div class="col-md-3">
+                    <span>Login Id</span><span asp-validation-for="AppUserData.LoginId" class="text-danger"></span>
+                    <input type="text" asp-for="AppUserData.LoginId" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span>Password</span><span asp-validation-for="AppUserData.Password" class="text-danger"></span>
+                    <input type="text" asp-for="AppUserData.Password" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <hr />
+                    <button type="submit" class="btn btn-blueTwo">  Save </button>
+                    <button type="reset" class="btn btn-sliverOne"> Reset </button>
+                </div>
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="AppUserData.LastActiveDate" value="@System.DateTime.Now" />
+            <input type="hidden" asp-for="AppUserData.RecordedBy" value="@User.Identity.Name" />
+            <input type="hidden" asp-for="AppUserData.RecordedOn" value="@System.DateTime.Now" />
+        </div>
+    </div>
+</form>
+
+@Html.Partial("_AppUsersListPartial", Model.AppUsersList)
+
+@section Scripts {@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }}

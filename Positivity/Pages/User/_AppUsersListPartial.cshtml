@@ -1,0 +1,58 @@
+﻿@model List<AppUser>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"> <strong>Application Users</strong></div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Login ID</th>
+                            <th>Display Name</th>
+                            <th>Last Active Date</th>
+                            <th>CellPhone</th>
+                            <th>Roles</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            string userRole = User.Claims.FirstOrDefault(s => s.Type == System.Security.Claims.ClaimTypes.Role).Value;
+
+                            foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@user.LoginId</td>
+                                    <td>@user.DisplayName</td>
+                                    <td>@user.LastActiveDate.ToShortDateString()</td>
+                                    <td>@user.CellPhone</td>
+                                    <td>
+                                        @foreach (var role in user.AppUserRoles)
+                                        {
+                                            @role.AppRole.Description
+                                        }
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="@Navigator.UpdateAppUser/@user.Id" class="btn btn-xs btn-greenTwo"><span class="glyphicon glyphicon-edit"> </span> Edit</a>
+                                        <a href="@Navigator.CreateUserWidget/@user.Id" class="btn btn-xs btn-blueThree">Widgets</a>
+                                        @if (userRole == Roles.SuperAdmin.ToString())
+                                        {
+                                            <a  href="@Navigator.ResetPassword/@user.Id" class="btn btn-xs btn-brownTwo" >Reset Password</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                <hr />
+                <div class="col-md-4">
+                    <a asp-controller="Security" asp-action="AddAppUser" class="btn  btn-sm btn-greenOne">
+                        <span class="glyphicon glyphicon-plus"> </span>  Add New User
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

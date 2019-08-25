@@ -1,0 +1,56 @@
+﻿@page "{caseIntakeId}"
+
+@model Positivity.Pages.Case.Assessments.MentalHealthAssessmentsModel
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "Assessments", CaseId = Model.CaseIntakeId }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = Model.CaseIntakeId })
+
+@Html.Partial("Common/_PageTitlePartial", "Mental Health Assessments")
+
+@{ViewData["Title"] = "Mental Health Assessments";}
+
+<div class="panel panel-info">
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Date Clinitian Signed On</th>
+                    <th>Date Supervisor Signed On</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var assessment in Model.MentalHealthAssessmentList)
+                    {
+                        <tr>
+                            <td>@assessment.AssessmentDate.ToString("MMM-dd-yyyy")</td>
+                            <td>
+                                @if (@assessment.DateClinitianSignedOn.HasValue)
+                                {
+                                    @assessment.DateClinitianSignedOn.Value.ToString("MMM-dd-yyyy")
+                                }
+                            </td>
+                            <td>
+                                @if (@assessment.DateClinitianSignedOn.HasValue)
+                                {
+                                    @assessment.DateSupervisorSignedOn.Value.ToString("MMM-dd-yyyy")
+                                }
+                            </td>
+                            <td><a href='@Navigator.UpdateMentalHealthAssessment/@assessment.Id' class="btn btn-xs btn-greenTwo"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <hr />
+        <div class="col-md-4">
+            <a href='@Navigator.CreateMentalHealthAssessment/@Model.CaseIntakeId' class="btn btn-sm btn-greenOne">
+                <span class="glyphicon glyphicon-plus"></span>
+                Add New Assessment
+            </a>
+        </div>
+    </div>
+</div>

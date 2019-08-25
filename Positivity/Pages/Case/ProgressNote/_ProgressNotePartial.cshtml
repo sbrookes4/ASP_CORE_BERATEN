@@ -1,0 +1,184 @@
+﻿@model ProgressNote
+
+@inject BeratenHealthcareDataInterfaceLib.ILookup LookupMan
+
+@inject BeratenHealthcareDataInterfaceLib.ITreatmentPlan TreatmentPlanMan
+
+@inject BeratenHealthcareDataInterfaceLib.IIntake IntakeMan
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CaseIntakeId" />
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>Date of Service</span><span asp-validation-for="DateOfService" class="text-danger"></span>
+                        <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="DateOfService" class="form-control" style='width: 100%;' />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>Time of Service</span><span asp-validation-for="TimeOfService" class="text-danger"></span>
+                        <kendo-timepicker for="TimeOfService" class="form-control" style='width: 100%;' />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Duration<span asp-validation-for="Duration" class="text-danger"></span>
+                        <select class="form-control" asp-for="Duration">
+                            <option value="0">NA</option>
+                            <option value="15">15 mins</option>
+                            <option value="30">30 mins</option>
+                            <option value="45">45 mins</option>
+                            <option value="60">60 mins</option>
+                            <option value="75">1 Hour 15 mins</option>
+                            <option value="90">1 Hour 30 mins</option>
+                            <option value="105">1 Hour 45 mins</option>
+                            <option value="120">2 Hours </option>
+                            <option value="135">2 Hours 15 mins</option>
+                            <option value="150">2 Hours 30 mins</option>
+                            <option value="165">2 Hours 45 mins</option>
+                            <option value="180">3 Hours </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="control-checkbox">
+                            <span>Is Non Billable</span>
+                            <input type="checkbox" asp-for="IsNonBillable" />
+                            <div class="checkbox-label"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>Billing Procedure</span><span asp-validation-for="BillingProcedureId"></span>
+                        <select asp-for="BillingProcedureId" class="form-control"
+                                @*asp-items="@LookupMan.GetBillingProcedureList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})" class="form-control" *@>
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>Modality</span><span asp-validation-for="TreatmentModalityLookupId"></span>
+                        <select asp-for="TreatmentModalityLookupId" class="form-control"
+                                asp-items="@LookupMan.GetTreatmentModalityList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})" class="form-control">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>Service Location</span><span asp-validation-for="ServiceLocationLookupId"></span>
+                        <select asp-for="ServiceLocationLookupId" class="form-control"
+                                asp-items="@LookupMan.GetServiceLocationsList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})" class="form-control">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>Contact Method</span><span asp-validation-for="ContactMethodLookupId"></span>
+                        <select asp-for="ContactMethodLookupId" class="form-control"
+                                asp-items="@LookupMan.GetContactMethodList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})" class="form-control">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>Appointment Status</span><span asp-validation-for="AppointmentStatusLookupId"></span>
+                        <select asp-for="AppointmentStatusLookupId" class="form-control"
+                                asp-items="@LookupMan.GetAppointmentStatusList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})" class="form-control">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>Goal</span><span asp-validation-for="TreatmentGoalId"></span>
+                        <style>
+                            .k-combobox {
+                                width: 100%;
+                            }
+                        </style>
+                        @{IList<GoalDTO> goalsData = TreatmentPlanMan.GetAllTreatmentGoalForCase(Model.CaseIntakeId);}
+                        @(Html.Kendo().MultiColumnComboBoxFor(m => m.TreatmentGoalId)
+                                                    .DataValueField("Id")
+                                                    .DataTextField("Goal")
+                                                    .Filter("contains")
+                                                    .FilterFields(new string[] { "Goal", "Activities" })
+                                                    .Columns(columns =>
+                                                    {
+                                                        columns.Add().Field("Goal").Title("Goal Description").Width("250px");
+                                                        columns.Add().Field("Modalities").Title("Modalities").Width("700px");
+                                                    })
+                                                    .HtmlAttributes(new { @style = "weight:100%;" })
+                                                    .BindTo(goalsData)
+                        )
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <lable>Team Member</lable>
+                        <select asp-for="AppUserId"
+                                asp-items="@IntakeMan.GetCaseTeam(Model.CaseIntakeId).Select(x => new SelectListItem { Text = x.DisplayName, Value = x.Id.ToString()})"
+                                class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <lable>Narrative</lable><span asp-validation-for="Narrative" class="text-danger"></span>
+                        @(Html.Kendo().EditorFor(Model => Model.Narrative)
+                                                        .HtmlAttributes(new { style = "width: 100%;height:635px" })
+                                                        .Tools(tools => tools
+                                                            .Clear()
+                                                            .Bold()
+                                                            .Italic()
+                                                            .InsertUnorderedList()
+                                                            .InsertOrderedList()
+                                                            .BackColor()
+                                                        )
+                        )
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="control-checkbox">
+                            <span>Notify All Team Members About This Note</span>
+                            <input type="checkbox" asp-for="NotifyOthers" />
+                            <div class="checkbox-label"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="control-checkbox">
+                            <span>Mark as completed. (And lock this Note as Read Only)</span>
+                            <input type="checkbox" asp-for="IsCompleted" />
+                            <div class="checkbox-label"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" asp-for="RecordedBy" value="@User.Identity.Name" />
+<input type="hidden" asp-for="RecordedOn" value="@System.DateTime.Now" />

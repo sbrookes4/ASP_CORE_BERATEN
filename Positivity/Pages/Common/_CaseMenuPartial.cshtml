@@ -1,0 +1,49 @@
+﻿@model Positivity.Models.MenuModel
+
+@{
+    var userRole = User.Claims.FirstOrDefault(s => s.Type == System.Security.Claims.ClaimTypes.Role).Value;
+}
+
+<div style="font-size:14px; margin-top:50px;">
+
+    <ul class="nav nav-pills nav-stacked">
+
+        <li>
+            <div>
+                <div style="color:#fff; text-align:center;">
+                    <label>@User.Claims.FirstOrDefault(s => s.Type == System.Security.Claims.ClaimTypes.GivenName).Value</label>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <a title="Log Off" asp-controller="Security" asp-action="LogOff"><span class="glyphicon glyphicon-log-out"></span> &nbsp;Log out</a>
+        </li>
+
+        <li>
+            <ul class="menu-divider"></ul>
+        </li>
+        <li id="Intake">
+            <a title="Intake" href="@Navigator.UpdateCaseIntake/@Model.CaseId"><span class="glyphicon glyphicon-book"></span> &nbsp;Case Intake</a>
+        </li>
+
+        <li id="TreatmentPlans">
+            <a title="Treatment Plans" href="@Navigator.TreatmentPlans/@Model.CaseId"><span class="glyphicon glyphicon-book"></span> &nbsp;Treatment Plan</a>
+        </li>
+
+        <li id="ProgressNotes">
+            <a title="Progress Notes" href="@Navigator.ProgressNotes/@Model.CaseId"><span class="glyphicon glyphicon-book"></span> &nbsp;Progress Notes</a>
+        </li>
+        <li id="Assessments">
+            <a title="Assessments" href="@Navigator.Assessments/@Model.CaseId"><span class="glyphicon glyphicon-book"></span> &nbsp;Assessments</a>
+        </li>
+        <li id="CaseDischarge">
+            <a title="Case Discharge" href="@Navigator.CaseDischarge/@Model.CaseId"><span class="glyphicon glyphicon-book"></span> &nbsp;Case Discharge</a>
+        </li>
+    </ul>
+    <span id="Dashboard"></span>
+</div>
+
+<script type="text/javascript">
+    document.getElementById("@Model.Identifier").className = "active";
+</script>

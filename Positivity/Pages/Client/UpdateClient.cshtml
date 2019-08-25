@@ -1,0 +1,25 @@
+﻿@page
+@model Positivity.Pages.Client.UpdateClientModel
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_DashboardMenuPartial", new MenuModel { Identifier = "" }); }}
+
+@Html.Partial("Common/_PageTitlePartial", "Update Client")
+
+<form method="post">
+
+    @Html.Partial("_ClientPartial", Model.ClientData)
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <input type="submit" value="Save" class="btn btn-blueTwo" asp-route-saveAndAdd="false" />
+                    <a href="@Navigator.UpdateClient/@Model.ClientData.Id" class="btn btn-sliverOne">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }}
+

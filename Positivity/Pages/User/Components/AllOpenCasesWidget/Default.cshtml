@@ -1,0 +1,33 @@
+﻿@model IList<CaseIntakeDTO>
+
+@if (Model?.Count == 0)
+{
+    return;
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading"><strong>All Open Cases</strong>  </div>
+    <div class="panel-body" style="padding:0px;">
+
+        @(Html.Kendo().Grid(Model)
+                                    .Name("AllOpenCasesGrid")
+                                    .HtmlAttributes(new { @style = "min-height:500px;" })
+                                    .Columns(columns =>
+                                    {
+                                        columns.Bound(c => c.CaseNumber).Title("Case #").HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Width(200).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                        columns.Bound(c => c.CaseName).Title("Case Name").HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Width(300).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                        columns.Bound(c => c.IntakeDate).Title("Date Opened").ClientTemplate("#= kendo.toString(IntakeDate, 'MMM-dd-yyyy') #").HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Width(200).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                        columns.Bound(c => c.IntakeMethod).Title("Intake Method").Width(200).HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                        columns.Template(
+                                                "<a class='btn btn-blueThree btn-xs'  href='" + Navigator.UpdateCaseIntake + "/#: Id#'>Case Intake</a>&nbsp;" +
+                                                "<a class='btn btn-brownOne  btn-xs'  href='" + Navigator.Assessments + "/#: Id#'>Assessments</a>&nbsp;" +
+                                                "<a class='btn btn-blueOne  btn-xs'  href='" + Navigator.ProgressNotes + "/#: Id#'>Progress Notes</a> "
+                                            ).Width(300);
+                                    })
+
+                                    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                                    .Sortable()
+                                    .Pageable(pageable => pageable.ButtonCount(10))
+        )
+    </div>
+</div>

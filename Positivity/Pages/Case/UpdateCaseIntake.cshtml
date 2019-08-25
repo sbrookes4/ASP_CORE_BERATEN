@@ -1,0 +1,30 @@
+﻿@page "{caseIntakeId}"
+@model Positivity.Pages.Case.UpdateCaseIntakeModel
+
+@{ViewData["Title"] = "Update";}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "Intake", CaseId = Model.CaseIntakeData.Id }); }}
+
+@Html.Partial("Common/_PageTitlePartial", "Edit Case Intake")
+
+<form method="post">
+
+    @Html.Partial("_CaseIntakePartial", Model.CaseIntakeData)
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <span>Recorded By: </span> <label>@Model.CaseIntakeData.RecordedBy </label>
+                    <span>Recorded On: </span> <label>@Model.CaseIntakeData.RecordedOn.ToShortDateString()</label>
+                </div>
+                <div class="col-md-4 text-right">
+                    <input type="submit" value="Update" class="btn btn-blueTwo" />
+                    <a href="@Navigator.ClientDetails/@Model.CaseIntakeData.ClientId" class="btn btn-sliverOne">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }}

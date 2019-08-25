@@ -1,0 +1,21 @@
+﻿@page "{CaseIntakeId}"
+
+@model Positivity.Pages.Case.Assessments.AssessmentsModel
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "Assessments", CaseId = Model.CaseIntakeId }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = Model.CaseIntakeId })
+
+@Html.Partial("Common/_PageTitlePartial", "Assessments")
+
+@{ViewData["Title"] = "Assessments";}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-12">
+
+            <a href="@Navigator.MentalHealthAssessmentList/@Model.CaseIntakeId" asp-page-rout @Model.CaseIntakeId " class="btn btn-brownOne">Mental Health Assessments</a>
+            <a href="@Navigator.ComprehensiveAssessmentList/@Model.CaseIntakeId" class="btn btn-brownOne">Comprehensive Assessments</a>
+        </div>
+    </div>
+</div>

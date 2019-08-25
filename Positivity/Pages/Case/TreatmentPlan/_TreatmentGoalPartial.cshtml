@@ -1,0 +1,87 @@
+﻿@model TreatmentGoal
+
+@inject BeratenHealthcareDataInterfaceLib.ILookup LookupMan
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="TreatmentPlanId" />
+        <div class="row">
+            <div class="col-md-9">
+                <span>Problem</span><span asp-validation-for="Problem" class="text-danger"></span>
+                <textarea asp-for="Problem" class="form-control" style="height:100px;"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Goal</span><span asp-validation-for="Goal" class="text-danger"></span>
+                <input type="text" asp-for="Goal" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Modalities</span><span asp-validation-for="Modalities" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.ModalitiesArray).BindTo(LookupMan.GetTreatmentModalityList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <span>Target Date</span><span asp-validation-for="TargetDate" class="text-danger"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="TargetDate" class="form-control" style='width: 100%;' />
+            </div>
+            <div class="col-md-3">
+                <span>Frequency Of Intervention</span><span asp-validation-for="FrequencyOfIntervention" class="text-danger"></span>
+                <select asp-for="FrequencyOfIntervention" class="form-control">
+                    <option></option>
+                    <option value="1">Daily </option>
+                    <option value="2">Weekly </option>
+                    <option value="3">biWeekly</option>
+                    <option value="4">Monthly </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <span>Outcome</span><span asp-validation-for="Outcome" class="text-danger"></span>
+                <select asp-for="Outcome" class="form-control">
+                    <option></option>
+                    <option value="1">InProgress </option>
+                    <option value="2">Successful </option>
+                    <option value="3">NotFulfilled</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span>Date Of Outcome</span><span asp-validation-for="DateOfOutcome" class="text-danger"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="DateOfOutcome" class="form-control" style='width: 100%;' />
+            </div>
+            <div class="col-md-3">
+                <span>Progress Rating</span><span asp-validation-for="ProgressRating" class="text-danger"></span>
+                <select asp-for="ProgressRating" class="form-control">
+                    <option></option>
+                    <option value="1">Not Applicable </option>
+                    <option value="2">Detoriation </option>
+                    <option value="3">No Progress</option>
+                    <option value="1">Minimal Progress</option>
+                    <option value="2">Fair Progress</option>
+                    <option value="3">Good Improvement</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div> &nbsp;</div>
+                <label class="control-checkbox">
+                    <span>Mark as completed. (And lock this Plan as Read Only)</span>
+                    <input type="checkbox" />
+                    <div class="checkbox-label"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" asp-for="RecordedBy" value="@User.Identity.Name" />
+    <input type="hidden" asp-for="RecordedOn" value="@System.DateTime.Now" />
+</div>

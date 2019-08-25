@@ -1,0 +1,13 @@
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\obj\Debug\netstandard2.0\BeratenHealthcareDataAccessLib.csproj.CoreCompileInputs.cache
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\obj\Debug\netstandard2.0\BeratenHealthcareDataAccessLib.AssemblyInfoInputs.cache
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\obj\Debug\netstandard2.0\BeratenHealthcareDataAccessLib.AssemblyInfo.cs
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\bin\Debug\netstandard2.0\BeratenHealthcareDataAccessLib.dll.config
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\bin\Debug\netstandard2.0\BeratenHealthcareDataAccessLib.deps.json
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\bin\Debug\netstandard2.0\BeratenHealthcareDataAccessLib.dll
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\bin\Debug\netstandard2.0\BeratenHealthcareDataAccessLib.pdb
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\bin\Debug\netstandard2.0\BeratenHealthcareModels.dll
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\bin\Debug\netstandard2.0\BeratenHealthcareModels.pdb
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\obj\Debug\netstandard2.0\BeratenHealthcareDataAccessLib.csprojAssemblyReference.cache
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\obj\Debug\netstandard2.0\BeratenHealthcareDataAccessLib.csproj.CopyComplete
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\obj\Debug\netstandard2.0\BeratenHealthcareDataAccessLib.dll
+C:\BeratenProjects\BeratenHealthcareDataAccessLib\obj\Debug\netstandard2.0\BeratenHealthcareDataAccessLib.pdb

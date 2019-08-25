@@ -1,0 +1,28 @@
+﻿@page
+@model Positivity.Pages.Client.EditGuardianModel
+@{
+    ViewData["Title"] = "Edit Guardian";
+}
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_DashboardMenuPartial", new MenuModel { Identifier = "" }); }}
+
+@{ViewBag.Title = "Edit Guardian";}
+
+@Html.Partial("Common/_PageTitlePartial", "Edit Guardian")
+
+
+<form method="post">
+
+    @Html.Partial("_GuardianPartial", Model.GuardianData)
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <input type="submit" value="Save" class="btn btn-blueTwo" asp-route-saveAndAdd="false" />
+                    <a href="https://www.google.com" class="btn btn-sliverOne">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

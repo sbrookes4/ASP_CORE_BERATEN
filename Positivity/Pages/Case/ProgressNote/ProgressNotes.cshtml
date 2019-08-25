@@ -1,0 +1,76 @@
+﻿@page "{CaseIntakeId}"
+
+@model Positivity.Pages.Case.ProgressNote.ProgressNotesModel
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "ProgressNotes", CaseId = Model.CaseIntakeId }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = Model.CaseIntakeId })
+
+@Html.Partial("Common/_PageTitlePartial", "Progress Notes")
+
+@{ViewData["Title"] = "Progress Notes";}
+
+<div class="panel panel-info">
+    <div class="panel-body" style="padding:0px">
+
+        @(Html.Kendo().Tooltip()
+                                            .For("#noteList")
+                                            .Position(TooltipPosition.Top)
+                                            .Filter("label")
+                                            .Width(400)
+        )
+        <div id="noteList">
+            @(Html.Kendo().Grid(Model.ProgressNoteList)
+                                                    .Name("progressNotesGrid")
+                                                    .HtmlAttributes(new { @style = "min-height:600px;" })
+                                                    .Columns(columns =>
+                                                    {
+
+                                                        columns.Bound(c => c.DateTimeFormat).Title("Date").HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Width(220).HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).DataTextField("DateOfService")));
+
+                                                        columns.Bound(c => c.TreatmentModalityDesc).Title("Treatment Modality").HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Width(500).HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+
+                                                        columns.Bound(c => c.ContactMethodDesc).Title("Contact Method").HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Width(300).HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+
+                                                        columns.Bound(c => c.ServiceLocationDesc).Title("Service Location").HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Width(300).HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+
+                                                        columns.Template(
+                                                                "# if (Narrative != null) { #" +
+                                                                "<label title='#: Narrative #' class='glyphicon glyphicon-comment' style='color:\\#A5A5A5'></label>" +
+                                                                "#} #"
+                                                                ).Width(40);
+
+                                                        columns.Template("# if (IsCompleted) { #" +
+                                                                "<a class='btn btn-blueThree btn-xs' href='" + Navigator.UpdateProgressNote + "/#: Id#'> View </a>" +
+                                                                "# } else { #" +
+                                                                "<a class='btn btn-greenTwo btn-xs' href='" + Navigator.UpdateProgressNote + "/#: Id#'> <span class='glyphicon glyphicon-edit'></span>  Edit</a>" +
+                                                                "#} #");
+
+                                                        columns.Template("# if (IsCompleted) { #" +
+                                                                "<a class='btn btn btn-greenTwo btn-xs' href='" + Navigator.UpdateProgressNote + "/#: Id#'> View </a>" +
+                                                                "# } else { #" +
+                                                                "<a class='btn btn-blueThree btn-xs' href='" + Navigator.ViewProgressNote + "/#: Id#'> <span class='glyphicon '></span>  View</a>" +
+                                                                "#} #");
+
+
+
+
+
+                                                    })
+                                                    .ToolBar(toolbar =>
+                                                    {
+                                                        toolbar.ClientTemplate("<a href='" + Navigator.CreateProgressNote + "/" + Model.CaseIntakeId + "' class='btn btn-greenOne'><span class='glyphicon glyphicon-plus'></span> Add New </a> <a href='" + Navigator.ViewProgressNotes + "/" + Model.CaseIntakeId + "' class='btn btn-yellowTwo'> View </a> <a href='" + Navigator.PrintProgressNotes + "/" + Model.CaseIntakeId + "' class='btn btn-yellowTwo' target='_blank'> Print  </a>");
+                                                    })
+                                                    .Sortable()
+                                                    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                                                    .Pageable(pageable => pageable.ButtonCount(10))
+                                                    .Groupable()
+                                                    .Navigatable()
+                                                        .DataSource(x => x
+                                                        .Custom().PageSize(10)
+                                                            .Sort(sort => sort.Add(c => c.DateOfService).Descending())
+                                                )
+            )
+        </div>
+    </div>
+</div>

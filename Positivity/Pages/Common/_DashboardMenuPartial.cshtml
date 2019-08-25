@@ -1,0 +1,42 @@
+﻿@model Positivity.Models.MenuModel
+
+<div>
+
+    @{
+        var userRole = User.Claims.FirstOrDefault(s => s.Type == System.Security.Claims.ClaimTypes.Role).Value;
+    }
+
+    <div style="font-size:14px; margin-top:50px;">
+
+        <ul class="nav nav-pills nav-stacked">
+
+            <li>
+                <div>
+                    <div style="color:#fff; text-align:center;">
+                        <label>@User.Claims.FirstOrDefault(s => s.Type == System.Security.Claims.ClaimTypes.GivenName).Value</label>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <a asp-page="@Navigator.ChangePassword"><span class="glyphicon glyphicon-cog"></span>&nbsp; Change Password</a>
+            </li>
+
+            <li>
+                <a title="Log Off" asp-page="@Navigator.Login" asp-page-handler="OnGetLogOff"><span class="glyphicon glyphicon-log-out"></span>&nbsp; Log out</a>
+            </li>
+
+            <li>
+                <ul class="menu-divider"></ul>
+            </li>
+            <li>
+                <a asp-page="@Navigator.CreateAppUser"><span class="glyphicon glyphicon-log-out"></span>&nbsp; <span class="side-item">Manage Users</span></a>
+            </li>
+        </ul>
+        <span id="Dashboard"></span>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.getElementById("@Model.Identifier").className = "active";
+</script>

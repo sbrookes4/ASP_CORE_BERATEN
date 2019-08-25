@@ -1,0 +1,18 @@
+﻿@model Positivity.Models.MenuModel
+
+<div class="row">
+    <div class="panel panel-menu">
+        <div class="panel-heading">
+            <div class="btn-group">
+                <a href="@Navigator.CaseSearch" class="btn btn-menu-inactive" id="CaseSearch">Search for Cases</a>
+            </div>
+            <div class="btn-group">
+                <a href="@Navigator.ClientSearch" class="btn btn-menu-inactive" id="ClientSearch">Search for Clients</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.getElementById("@Model.Identifier").className = "btn btn-menu-active";
+</script>

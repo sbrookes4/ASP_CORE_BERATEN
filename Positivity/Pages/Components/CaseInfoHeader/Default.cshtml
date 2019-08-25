@@ -1,0 +1,30 @@
+﻿@model CaseIntakeDTO
+
+<div class="row" style="font-size:14px; background-color:#e6e5f1; padding:10px 20px 0px 20px">
+
+    <table class="table table-responsive" style="margin-bottom:10px">
+        <tbody>
+            <tr>
+                <td><label>Case # :</label><span>&nbsp; @Model.CaseNumber </span></td>
+                <td><label>Opened On : </label><span>&nbsp; &nbsp; @Model.IntakeDate</span></td>
+                <td><label>Name : </label><span> @Model.CaseName</span></td>
+                <td>
+                    <a href="@Navigator.ClientDetails/@Model.ClientId">Client Detials</a>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:#f8f8f8"><label>Client Name : </label><span> @Model.ClientName</span></td>
+                <td style="background-color:#f8f8f8"><label>Medical Record Number : </label><span>&nbsp; &nbsp; @Model.ClientMRNumber</span></td>
+                <td style="background-color:#f8f8f8"><label>Date of Birth : </label><span>&nbsp; &nbsp; @Model.ClientDOB</span></td>
+                <td style="background-color:#f8f8f8">
+                    <a target="_blank">
+                        Print Intake
+                    </a>
+                </td>
+            </tr>
+            @*<tr>
+                    <td colspan="4" style="background-color:#f8f8f8"><label>Presenting Problems : </label><span> @Model.PresentingProblems.Replace("@", " , ")</span></td>
+                </tr>*@
+        </tbody>
+    </table>
+</div>

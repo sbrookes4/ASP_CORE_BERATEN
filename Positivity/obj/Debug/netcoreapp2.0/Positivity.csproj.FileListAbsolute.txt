@@ -1,0 +1,17 @@
+C:\BeratenProjects\Positivity\obj\Debug\netcoreapp2.0\Positivity.csproj.CoreCompileInputs.cache
+C:\BeratenProjects\Positivity\obj\Debug\netcoreapp2.0\Positivity.AssemblyInfoInputs.cache
+C:\BeratenProjects\Positivity\obj\Debug\netcoreapp2.0\Positivity.AssemblyInfo.cs
+C:\BeratenProjects\Positivity\bin\Debug\netcoreapp2.0\Positivity.deps.json
+C:\BeratenProjects\Positivity\bin\Debug\netcoreapp2.0\Positivity.runtimeconfig.json
+C:\BeratenProjects\Positivity\bin\Debug\netcoreapp2.0\Positivity.runtimeconfig.dev.json
+C:\BeratenProjects\Positivity\bin\Debug\netcoreapp2.0\Positivity.dll
+C:\BeratenProjects\Positivity\bin\Debug\netcoreapp2.0\Positivity.pdb
+C:\BeratenProjects\Positivity\bin\Debug\netcoreapp2.0\BeratenHealthcareDataAccessLib.dll
+C:\BeratenProjects\Positivity\bin\Debug\netcoreapp2.0\BeratenHealthcareModels.dll
+C:\BeratenProjects\Positivity\bin\Debug\netcoreapp2.0\BeratenHealthcareDataAccessLib.pdb
+C:\BeratenProjects\Positivity\bin\Debug\netcoreapp2.0\BeratenHealthcareDataAccessLib.dll.config
+C:\BeratenProjects\Positivity\bin\Debug\netcoreapp2.0\BeratenHealthcareModels.pdb
+C:\BeratenProjects\Positivity\obj\Debug\netcoreapp2.0\Positivity.csprojAssemblyReference.cache
+C:\BeratenProjects\Positivity\obj\Debug\netcoreapp2.0\Positivity.csproj.CopyComplete
+C:\BeratenProjects\Positivity\obj\Debug\netcoreapp2.0\Positivity.dll
+C:\BeratenProjects\Positivity\obj\Debug\netcoreapp2.0\Positivity.pdb

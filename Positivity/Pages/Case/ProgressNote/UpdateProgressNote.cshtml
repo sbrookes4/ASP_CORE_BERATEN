@@ -1,0 +1,30 @@
+﻿@page "{progressNoteId}"
+@model Positivity.Pages.Case.ProgressNote.UpdateProgressNoteModel
+
+@{ViewData["Title"] = "Update";}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "ProgressNotes", CaseId = Model.ProgressNoteData.CaseIntakeId }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = Model.ProgressNoteData.CaseIntakeId })
+
+@Html.Partial("Common/_PageTitlePartial", "Edit Progress Note")
+
+<form method="post">
+
+    @Html.Partial("_ProgressNotePartial", Model.ProgressNoteData)
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <span>Recorded By: </span> <label>@Model.ProgressNoteData.RecordedBy </label>
+                    <span>Recorded On: </span> <label>@Model.ProgressNoteData.RecordedOn.ToShortDateString()</label>
+                </div>
+                <div class="col-md-4 text-right">
+                    <input type="submit" value="Update" class="btn btn-blueTwo" />
+                    <a href="@Navigator.ProgressNotes/@Model.ProgressNoteData.CaseIntakeId" class="btn btn-sliverOne">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

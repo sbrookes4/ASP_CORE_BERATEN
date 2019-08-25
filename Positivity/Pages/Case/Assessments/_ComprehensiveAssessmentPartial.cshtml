@@ -1,0 +1,211 @@
+﻿@model ComprehensiveAssessment
+
+@inject BeratenHealthcareDataInterfaceLib.ILookup LookupMan
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CaseIntakeId" />
+        <div class="row">
+            <div class="col-md-3">
+                <span>Assessment Date</span><span asp-validation-for="AssessmentDate" class="text-danger"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="AssessmentDate" class="form-control" style='width: 100%;' />
+            </div>
+            <div class="col-md-3">
+                <span>Assessment Completed Date</span><span asp-validation-for="DateAssessmentCompleted" class="text-danger"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="DateAssessmentCompleted" class="form-control" style='width: 100%;' />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Employment</strong></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <span>Education</span><span asp-validation-for="EducationLookupId"></span>
+                <select asp-for="EducationLookupId" asp-items="@LookupMan.GetEducationList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})" class="form-control">
+                    <option></option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span>Employment</span><span asp-validation-for="EmploymentLookupId"></span>
+                <select asp-for="EmploymentLookupId" asp-items="@LookupMan.GetEmploymentList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})" class="form-control">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Employment History</span><span asp-validation-for="EmploymentHistory"></span>
+                <textarea asp-for="EmploymentHistory" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Relationship With Management Description</span><span asp-validation-for="RelationshipWithManagementDesc"></span>
+                <textarea asp-for="RelationshipWithManagementDesc" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Relationship With Peers Description</span><span asp-validation-for="RelationshipWithPeersDesc"></span>
+                <textarea asp-for="RelationshipWithPeersDesc" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Social Relationship Description</span><span asp-validation-for="SocialRelationshipDesc"></span>
+                <textarea asp-for="SocialRelationshipDesc" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Community Involvment Description</span><span asp-validation-for="CommunityInvolvmentDesc"></span>
+                <textarea asp-for="CommunityInvolvmentDesc" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>School</strong></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <span>School</span><span asp-validation-for="School" class="text-danger"></span>
+                <input type="text" asp-for="School" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span>School Teacher</span><span asp-validation-for="SchoolTeacher" class="text-danger"></span>
+                <input type="text" asp-for="SchoolTeacher" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <span>School Grade</span><span asp-validation-for="SchoolGrade" class="text-danger"></span>
+                <input type="text" asp-for="SchoolGrade" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span>School GPA</span><span asp-validation-for="SchoolGPA" class="text-danger"></span>
+                <input type="text" asp-for="SchoolGPA" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Relationship With Staff Description</span><span asp-validation-for="RelationshipWithStaffDesc"></span>
+                <textarea asp-for="RelationshipWithStaffDesc" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Relationship With Classmates Description</span><span asp-validation-for="RelationshipWithClassmatesDesc"></span>
+                <textarea asp-for="RelationshipWithClassmatesDesc" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>School Attendance And Additional Notes Description</span><span asp-validation-for="SchoolAttendanceAndAdditionalNotesDesc"></span>
+                <textarea asp-for="SchoolAttendanceAndAdditionalNotesDesc" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>School Educational And Vocational Goals Description</span><span asp-validation-for="SchoolEducationalAndVocationalGoalsDesc"></span>
+                <textarea asp-for="SchoolEducationalAndVocationalGoalsDesc" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>School Special Needs Description</span><span asp-validation-for="SchoolSpecialNeedsDesc"></span>
+                <textarea asp-for="SchoolSpecialNeedsDesc" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Historical</strong></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-9">
+                <span>Historical Substance Abuse Data</span><span asp-validation-for="HistoricalSubstanceAbuseData"></span>
+                <textarea asp-for="HistoricalSubstanceAbuseData" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Historical Medication Data</span><span asp-validation-for="HistoricalMedicationData"></span>
+                <textarea asp-for="HistoricalMedicationData" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Historical Family Data</span><span asp-validation-for="HistoricalFamilyData"></span>
+                <textarea asp-for="HistoricalFamilyData" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Historical Developmental Data</span><span asp-validation-for="HistoricalDevelopmentalData"></span>
+                <textarea asp-for="HistoricalDevelopmentalData" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Historical Behavioral Data</span><span asp-validation-for="HistoricalBehavioralData"></span>
+                <textarea asp-for="HistoricalBehavioralData" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Historical Emotional Data</span><span asp-validation-for="HistoricalEmotionalData"></span>
+                <textarea asp-for="HistoricalEmotionalData" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Historical Social Data</span><span asp-validation-for="HistoricalSocialData"></span>
+                <textarea asp-for="HistoricalSocialData" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Historical Psychiatric Data</span><span asp-validation-for="HistoricalPsychiatricData"></span>
+                <textarea asp-for="HistoricalPsychiatricData" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Historical Recreational Data</span><span asp-validation-for="HistoricalRecreationalData"></span>
+                <textarea asp-for="HistoricalRecreationalData" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Historical Nutritional Description</span><span asp-validation-for="HistoricalNutritionalDesc"></span>
+                <textarea asp-for="HistoricalNutritionalDesc" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Historical Legal Issues Description</span><span asp-validation-for="HistoricalLegalIssuesDesc"></span>
+                <textarea asp-for="HistoricalLegalIssuesDesc" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label class="control-checkbox">
+                    <span>Mark as completed. (And lock this Assessment as Read Only)</span>
+                    <input type="checkbox" asp-for="IsCompleted" />
+                    <div class="checkbox-label"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" asp-for="RecordedBy" value="@User.Identity.Name" />
+<input type="hidden" asp-for="RecordedOn" value="@System.DateTime.Now" />

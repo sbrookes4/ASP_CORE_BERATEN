@@ -1,0 +1,80 @@
+﻿@page
+@model Positivity.Pages.Search.CaseSearchModel
+
+@{ViewData["Title"] = "Case Search";}
+
+@Html.Partial("Common/_PageTitlePartial", "Case Search")
+
+@Html.Partial("_SearchMenuPartial", new MenuModel { Identifier = "CaseSearch" })
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_DashboardMenuPartial", new MenuModel { Identifier = "Dashboard" }); }}
+
+<form method="post">
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <lable>Case Number</lable>
+                    <input type="text" asp-for="SearchData.CaseNumber" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <lable>Case Name</lable>
+                    <input type="text" asp-for="SearchData.CaseName" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <lable>From Case Date</lable>
+                    <kendo-datepicker max="@DateTime.Now" for="SearchData.CaseDate" class="form-control" style='width: 100%;' />
+                </div>
+                <div class="col-md-3">
+                    CaseDate
+                    <span>To Case Date</span>
+                    <kendo-datepicker max="@DateTime.Now" for="SearchData.ToCaseDate" class="form-control" style='width: 100%;' />
+                </div>
+                <div class="col-md-1">
+                    <div>&nbsp;</div>
+                    <input type="submit" value="Search" class="btn btn-blackTwo pull-right" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                TIP: By Clicking on "Search Button" without any filter parameters, you can get the top 10 results
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (Model.CaseList?.Count == 0)
+{
+    <div class="col-md-12">
+        <strong>No Records Returned. Please change the search criteria and try again.</strong>
+    </div>
+
+}
+else if (Model.CaseList?.Count > 0)
+{
+    <div class="panel panel-info">
+        <div class="panel-body" style="padding:0px;">
+
+            @(Html.Kendo().Grid(Model.CaseList)
+                                                .Name("CaseSearchGrid")
+                                                .Columns(columns =>
+                                                {
+                                                    columns.Bound(c => c.CaseNumber).Title("Case #").HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Width(150).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                                    columns.Bound(c => c.CaseName).Title("Case Name").HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Width(250).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                                    columns.Bound(c => c.IntakeDate).ClientTemplate("#=kendo.toString(IntakeDate,'MMM-dd-yyyy')#").Title("Date Opened").HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Width(200).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                                    columns.Bound(c => c.ClientMRNumber).Title("Client Medical Record #").HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Width(200).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                                    columns.Bound(c => c.ClientName).Title("Client Name").HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Width(300).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                                    columns.Template("<a class='btn btn-yellowOne btn-xs'  href='" + Navigator.UpdateCaseIntake + "/#: Id#'>Case Intake</a> " +
+                                                        "<a class='btn btn-blueThree btn-xs'  href='" + Navigator.ClientDetails + "/#: Id#'>Client Detials</a>").Width(220);
+
+                                                })
+
+                                                .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                                                .Sortable()
+                                                .Pageable(pageable => pageable.ButtonCount(10))
+            )
+        </div>
+    </div>
+
+}
+
+@section Scripts {@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }}

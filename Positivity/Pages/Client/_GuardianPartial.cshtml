@@ -1,0 +1,151 @@
+﻿@model BeratenHealthcareModels.Guardian
+
+@inject BeratenHealthcareDataInterfaceLib.ILookup LookupMan
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <span>First Name</span><span asp-validation-for="FirstName"></span>
+                <input type="text" asp-for="FirstName" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <span>Middle Name</span><span asp-validation-for="MiddleName"></span>
+                <input type="text" asp-for="MiddleName" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <span>Last Name</span><span asp-validation-for="LastName"></span>
+                <input type="text" asp-for="LastName" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <span>Alias</span><span asp-validation-for="Alias"></span>
+                <input type="text" asp-for="Alias" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+
+                <span>Date of Birth</span><span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="DateOfBirth" class="form-control" style='width: 100%;' />
+            </div>
+
+            <div class="col-md-3">
+
+                <span>Relationship</span><span asp-validation-for="Alias"></span>
+                <select asp-for="RelationshipTypeLookupId" asp-items="@LookupMan.GetRelationshipTypeList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})" class="form-control">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <span>Gender</span><span asp-validation-for="GenderLookupId"></span>
+                <select asp-for="GenderLookupId" asp-items="@LookupMan.GetGenderList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})" class="form-control">
+                    <option></option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <span>Race</span><span asp-validation-for="RaceLookupId"></span>
+                <select asp-for="RaceLookupId"
+                        asp-items="@LookupMan.GetRaceList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})" class="form-control">
+                    <option></option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <span>Ethnicity Hispanic</span><span asp-validation-for="EthnicityHispanicLookupId"></span>
+                <select asp-for="EthnicityHispanicLookupId"
+                        asp-items="@LookupMan.GetEthnicityList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})" class="form-control">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <span>Street Address</span><span asp-validation-for="Address"></span>
+                <input type="text" asp-for="Address" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+
+                <span>City</span><span asp-validation-for="City"></span>
+                <input type="text" asp-for="City" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <span>State</span>
+                <select asp-for="StateLookupId"
+                        asp-items="@LookupMan.GetStateList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})" class="form-control">
+                    <option></option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <span>Zip</span><span asp-validation-for="Zip" class="text-danger"></span>
+                <input type="text" asp-for="Zip" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <span>Primary Phone</span><span asp-validation-for="PrimaryPhone" class="text-danger"></span>
+                @(Html.Kendo().MaskedTextBoxFor(Model => Model.PrimaryPhone).HtmlAttributes(new { @class = "form-control" }).Mask("(999) 000-0000") )
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <span>Secondary Phone</span><span asp-validation-for="SecondaryPhone" class="text-danger"></span>
+                @(Html.Kendo().MaskedTextBoxFor(Model => Model.SecondaryPhone).HtmlAttributes(new { @class = "form-control" }).Mask("(999) 000-0000") )
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <label class="control-checkbox">
+                    <span>Is Emergency Contact</span>
+                    <input type="checkbox" asp-for="IsEmergencyContact" />
+                    <div class="checkbox-label"></div>
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <label class="control-checkbox">
+                    <span>Is Financially Responsible</span>
+                    <input type="checkbox" asp-for="IsFinanciallyResponsible" />
+                    <div class="checkbox-label"></div>
+                </label>
+            </div>
+        </div>
+
+        <input type="hidden" asp-for="RecordedBy" value="@User.Identity.Name" />
+        <input type="hidden" asp-for="RecordedOn" value="@System.DateTime.Now" />
+    </div>
+</div>
+</div>

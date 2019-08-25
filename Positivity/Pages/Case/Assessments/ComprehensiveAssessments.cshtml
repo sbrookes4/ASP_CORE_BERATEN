@@ -1,0 +1,49 @@
+﻿@page "{caseIntakeId}"
+
+@model Positivity.Pages.Case.Assessments.ComprehensiveAssessmentsModel
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "Assessments", CaseId = Model.CaseIntakeId }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = Model.CaseIntakeId })
+
+@Html.Partial("Common/_PageTitlePartial", "Comprehensive Assessments")
+
+@{ViewData["Title"] = "Comprehensive Assessments";}
+
+<div class="panel panel-info">
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Date Completed</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var assessment in Model.ComprehensiveAssessmentList)
+                    {
+                        <tr>
+                            <td>@assessment.AssessmentDate.ToString("MMM-dd-yyyy")</td>
+                            <td>
+                                @if (assessment.DateAssessmentCompleted.HasValue)
+                                {
+                                    @assessment.DateAssessmentCompleted.Value.ToString("MMM-dd-yyy")
+                                }
+                            </td>
+                            <td><a href='@Navigator.UpdateComprehensiveAssessment/@assessment.Id' class="btn btn-xs btn-greenTwo"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <hr />
+        <div class="col-md-4">
+            <a href='@Navigator.CreateComprehensiveAssessment/@Model.CaseIntakeId' class="btn btn-sm btn-greenOne">
+                <span class="glyphicon glyphicon-plus"></span>
+                Add New Assessment
+            </a>
+        </div>
+    </div>
+</div>

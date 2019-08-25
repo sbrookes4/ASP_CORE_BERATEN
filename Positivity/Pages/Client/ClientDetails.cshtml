@@ -1,0 +1,55 @@
+﻿@page "{clientId}"
+
+@model Positivity.Pages.Client.ClientDetailsModel
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_DashboardMenuPartial", new MenuModel { Identifier = "" }); }}
+
+@{ViewBag.Title = "Client Details";}
+
+<!-- Client Header -->
+<div class="well page-head">
+    <div class="rowLabel">
+        <div class="col-md-10">
+            <span style="font-size:2em;">@Model.ClientData.DisplayName </span> &nbsp;&nbsp;&nbsp; <strong>@Model.ClientData.Age Years</strong>
+        </div>
+        <div class="col-md-2 text-right">
+            <a class="btn btn-greenTwo" href='@Navigator.UpdateClient/@Model.ClientData.Id'>
+                <span class="glyphicon glyphicon-edit"></span> Edit
+            </a>
+        </div>
+    </div>
+
+    <div class="rowLabel">
+        <div class="col-md-4">
+            <label>Medical Record Number:</label>
+            <span>@Model.ClientData.MedicalRecordNumber</span>
+        </div>
+        <div class="col-md-3">
+            <label> Birth Date: </label>
+            <span>@Model.ClientData.DateOfBirthFormatted </span>
+        </div>
+        <div class="col-md-3">
+            <label>Gender: </label>
+            <span>@Model.ClientData.GenderLookup?.Description</span>
+        </div>
+        <div class="col-md-2 text-right">
+            <a class="btn btn-greenTwo" href='@Navigator.CreateCaseIntake/@Model.ClientData.Id'>
+                <span class="glyphicon glyphicon-orange"></span> New Case Intake
+            </a>
+        </div>
+    </div>
+
+    <div class="rowLabel">
+        <div class="col-md-4">
+            <label>Race: </label>
+            <span>@Model.ClientData.RaceLookup?.Description</span>
+        </div>
+    </div>
+
+    <div class="rowLabel">
+        <div class="col-md-9">
+            <label>Address:</label>
+            <span>@Model.ClientData.DisplayAddress</span>
+        </div>
+    </div>
+</div>

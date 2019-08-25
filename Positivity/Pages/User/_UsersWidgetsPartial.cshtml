@@ -1,0 +1,34 @@
+﻿@model List<Widget>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"> <strong>User Widgets</strong></div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Widget Name</th>
+                            <th>Widget Order</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var widget in Model)
+                        {
+                            <tr>
+                                <td>@widget.WidgetComponentId.ToString()</td>
+                                <td>@widget.WidgetOrder</td>
+                                <td class="text-right">
+
+                                    <a asp-page-handler="Remove" asp-route-Id="@widget.Id" asp-route-userId="@widget.UserId" class="btn btn-xs btn-orangeOne"><span class="glyphicon glyphicon-trash"></span> Remove</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

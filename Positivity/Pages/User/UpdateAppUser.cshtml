@@ -1,0 +1,53 @@
+﻿@page "{appUserId}"
+
+@model Positivity.Pages.User.UpdateAppUserModel
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_DashboardMenuPartial", new MenuModel { Identifier = "Dashboard" }); }}
+
+<form asp-controller="Security" asp-action="EditAppUser" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading"><strong>Edit User</strong></div>
+        <div class="panel-body">
+            <input type="hidden" asp-for="AppUserData.LoginId" />
+            <input type="hidden" asp-for="AppUserData.Id" />
+            <input type="hidden" asp-for="AppUserData.FacilityId" />
+            <input type="hidden" asp-for="AppUserData.LastActiveDate" />
+            <input type="hidden" asp-for="AppUserData.Password" />
+            <input type="hidden" asp-for="AppUserData.IsActive" />
+
+            <div class="row">
+                <div class="col-md-3">
+                    <span>Login Id</span><span asp-validation-for="AppUserData.LoginId" class="text-danger"></span>
+                    <label type="text" class="form-control" disabled>@Model.AppUserData.LoginId</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <span>First Name</span><span asp-validation-for="AppUserData.FirstName" class="text-danger"></span>
+                    <input type="text" asp-for="AppUserData.FirstName" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span>Last Name</span><span asp-validation-for="AppUserData.LastName" class="text-danger"></span>
+                    <input type="text" asp-for="AppUserData.LastName" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span>Phone</span><span asp-validation-for="AppUserData.CellPhone" class="text-danger"></span>
+                    @(Html.Kendo().MaskedTextBoxFor(Model => Model.AppUserData.CellPhone).HtmlAttributes(new { @class = "form-control" }).Mask("(999) 000-0000") )
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <hr />
+                    <button type="submit" class="btn btn-blueTwo">  Update </button>
+                    <a href="@Navigator.CreateAppUser" class="btn btn-sliverOne" data-dismiss="modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" asp-for="AppUserData.RecordedBy" value="@User.Identity.Name" />
+    <input type="hidden" asp-for="AppUserData.RecordedOn" value="@System.DateTime.Now" />
+</form>
+
+@section Scripts {@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }}

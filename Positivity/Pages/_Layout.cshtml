@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | Positivity</title>
+
+    <environment names="Development, Production">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common-bootstrap.min.css" />
+        <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+
+    <environment names="Development, Production">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
+        <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
+    </environment>
+
+    <script>
+        function MenuOperator() {
+            var x = document.getElementById("MenuLeftSide");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                var element = document.getElementById("mainContent");
+                element.classList.remove("fullrightcontent");
+                element.classList.add("rightcontent");
+            } else {
+                x.style.display = "none";
+                var element = document.getElementById("mainContent");
+                element.classList.remove("rightcontent");
+                element.classList.add("fullrightcontent");
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="row" style="padding:0; margin:0;">
+            <div class="col-md-12" style="z-index:5; margin:0; padding:0 15px;">
+                @Html.Partial("Common/_TopMenuPartial")
+            </div>
+        </div>
+
+        <div class="leftmenu" id="MenuLeftSide">
+            @RenderSection("SideMenu", required: false)
+        </div>
+
+        <div class="rightcontent" id="mainContent">
+
+            @RenderBody()
+        </div>
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

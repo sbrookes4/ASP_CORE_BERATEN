@@ -1,0 +1,21 @@
+﻿<div class="row menu-top">
+    <div style="font-size:15px; font-weight: bold; padding:0 5px; border-bottom: solid 1px #ffeeee; margin-bottom:2px;">
+
+        <ul class="nav nav-justified">
+            <li>
+                <button class="btn btn-blueOne" onclick="MenuOperator()"><span class="glyphicon glyphicon-list"></span>&nbsp; P O S I T I V I T Y </button>
+            </li>
+            <li>
+                <a asp-page="@Navigator.Dashboard"><span class="glyphicon glyphicon-equalizer"></span>&nbsp; Dashboard</a>
+            </li>
+
+            <li>
+                <a asp-page="@Navigator.CreateClient"><span class="glyphicon glyphicon-file"></span>&nbsp; New Client</a>
+            </li>
+
+            <li>
+                <a href="@Navigator.CaseSearch"><span class="glyphicon glyphicon-search"></span>&nbsp; Search </a>
+            </li>
+        </ul>
+    </div>
+</div>

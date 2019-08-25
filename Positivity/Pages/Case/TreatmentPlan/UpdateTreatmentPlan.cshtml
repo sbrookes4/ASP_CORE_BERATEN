@@ -1,0 +1,84 @@
+﻿@page "{treatmentPlanId}"
+
+@model Positivity.Pages.Case.TreatmentPlan.UpdateTreatmentPlanModel
+
+@{ViewData["Title"] = "Update";}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "TreatmentPlans", CaseId = Model.TreatmentPlanData.CaseIntakeId }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = Model.TreatmentPlanData.CaseIntakeId })
+
+@Html.Partial("Common/_PageTitlePartial", "Edit Treatment Plan")
+
+<form method="post">
+
+    @Html.Partial("_TreatmentPlanPartial", Model.TreatmentPlanData)
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <span>Recorded By: </span> <label>@Model.TreatmentPlanData.RecordedBy </label>
+                    <span>Recorded On: </span> <label>@Model.TreatmentPlanData.RecordedOn.ToShortDateString()</label>
+                </div>
+                <div class="col-md-4 text-right">
+                    <input type="submit" value="Update" class="btn btn-blueTwo" />
+                    <a href="@Navigator.TreatmentPlans/@Model.TreatmentPlanData.CaseIntakeId" class="btn btn-sliverOne">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (Model.TreatmentPlanData.Id > 0)
+{
+    <div class="panel panel-info">
+        <div class="panel-heading"><strong>Treatment Goals</strong> </div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Goal Description</th>
+                        <th>Target Date</th>
+                        <th>Progress Rating</th>
+                        <th>Outcome</th>
+                        <th>Goal Accomplished</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var goal in Model.TreatmentGoalList)
+                        {
+                            <tr>
+                                <td>@goal.Goal.Replace("@", " , ")</td>
+                                <td width="150">@goal.TargetDateFormatted</td>
+                                <td width="150">@goal.ProgressRating.ToString()</td>
+                                <td width="150">@goal.Outcome.ToString()</td>
+                                <td width="150">
+                                    @if (goal.IsCompleted)
+                                    {
+                                        <label class="label label-info">Yes</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="label label-danger">No</label>
+                                    }
+                                </td>
+                                <td><a href='@Navigator.UpdateTreatmentGoal/@goal.Id/@Model.TreatmentPlanData.CaseIntakeId' class="btn btn-xs btn-greenTwo"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <hr />
+            <div class="col-md-4">
+                <a href='@Navigator.CreateTreatmentGoal/@Model.TreatmentPlanData.Id/@Model.TreatmentPlanData.CaseIntakeId' class="btn btn-sm btn-greenOne">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Add New Goal
+                </a>
+            </div>
+        </div>
+    </div>
+                        }
+@section Scripts {@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }}

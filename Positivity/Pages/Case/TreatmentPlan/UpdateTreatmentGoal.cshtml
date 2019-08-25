@@ -1,0 +1,30 @@
+﻿@page "{treatmentGoalId}/{caseIntakeId}"
+@model Positivity.Pages.Case.TreatmentPlan.UpdateTreatmentGoalModel
+
+@{ViewData["Title"] = "Update";}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "TreatmentPlans", CaseId = Model.CaseIntakeId }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = Model.CaseIntakeId })
+
+@Html.Partial("Common/_PageTitlePartial", "Edit Treatment Goal")
+
+<form method="post">
+
+    @Html.Partial("_TreatmentGoalPartial", Model.TreatmentGoalData)
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <span>Recorded By: </span> <label>@Model.TreatmentGoalData.RecordedBy </label>
+                    <span>Recorded On: </span> <label>@Model.TreatmentGoalData.RecordedOn.ToShortDateString()</label>
+                </div>
+                <div class="col-md-4 text-right">
+                    <input type="submit" value="Update" class="btn btn-blueTwo" />
+                    <a href="@Navigator.UpdateTreatmentPlan/@Model.TreatmentGoalData.TreatmentPlanId" class="btn btn-sliverOne">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

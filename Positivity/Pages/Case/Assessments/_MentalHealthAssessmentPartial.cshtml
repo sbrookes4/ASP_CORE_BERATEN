@@ -1,0 +1,396 @@
+﻿@model MentalHealthAssessment
+
+@inject BeratenHealthcareDataInterfaceLib.ILookup LookupMan
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CaseIntakeId" />
+        <div class="row">
+            <div class="col-md-3">
+                <span>Assessment Date</span><span asp-validation-for="AssessmentDate" class="text-danger"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="AssessmentDate" class="form-control" style='width: 100%;' />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>General Appearance</strong></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-9">
+                <span>Appearance </span><span asp-validation-for="Appearance" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.AppearanceArray).BindTo(LookupMan.GetAppearanceList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Body Type </span><span asp-validation-for="BodyType" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.BodyTypeArray).BindTo(LookupMan.GetBodyTypeList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Eye Contact </span><span asp-validation-for="EyeContact" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.EyeContactArray).BindTo(LookupMan.GetEyeContactList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Hygiene </span><span asp-validation-for="Hygiene" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.HygieneArray).BindTo(LookupMan.GetHygieneList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Behavior</strong></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-9">
+                <span>Attitude </span><span asp-validation-for="Attitude" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.AttitudeArray).BindTo(LookupMan.GetAttiduteList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Body Movement </span><span asp-validation-for="BodyMovement" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.BodyMovementArray).BindTo(LookupMan.GetBodyMovementList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Behavior With Examiners </span><span asp-validation-for="BehaviorWithExaminers" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.BehaviorWithExaminersArray).BindTo(LookupMan.GetBehaviorWithExaminersList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Behavior With Care Givers</span><span asp-validation-for="BehaviorWithCareGivers" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.BehaviorWithCareGiversArray).BindTo(LookupMan.GetBehaviorWithCareGiversList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Facial Expression </span><span asp-validation-for="FacialExpression" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.FacialExpressionArray).BindTo(LookupMan.GetFacialExpressionList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Interview </span><span asp-validation-for="Interview" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.InterviewArray).BindTo(LookupMan.GetInterviewList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Motor</strong></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-9">
+                <span>Fine Motor </span><span asp-validation-for="FineMotor" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.FineMotorArray).BindTo(LookupMan.GetFineMotorList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Gait </span><span asp-validation-for="Gait" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.GaitArray).BindTo(LookupMan.GetGaitList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Gross Motor </span><span asp-validation-for="GrossMotor" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.GrossMotorArray).BindTo(LookupMan.GetGrossMotorList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Mascular </span><span asp-validation-for="Mascular" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.MascularArray).BindTo(LookupMan.GetMascularList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Motor Behavior </span><span asp-validation-for="MotorBehavior" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.MotorBehaviorArray).BindTo(LookupMan.GetMotorBehaviorList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Regulation</strong></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-9">
+                <span>Activity Level </span><span asp-validation-for="ActivityLevel" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.ActivityLevelArray).BindTo(LookupMan.GetActivityLevelList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Affect </span><span asp-validation-for="Affect" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.AffectArray).BindTo(LookupMan.GetAffectList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Alertness </span><span asp-validation-for="Alertness" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.AlertnessArray).BindTo(LookupMan.GetAlertnessList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Attention </span><span asp-validation-for="Attention" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.AttentionArray).BindTo(LookupMan.GetAttentionList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Concentration </span><span asp-validation-for="Concentration" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.ConcentrationArray).BindTo(LookupMan.GetConcentrationList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>FrustrationTolerance </span><span asp-validation-for="FrustrationTolerance" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.FrustrationToleranceArray).BindTo(LookupMan.GetFrustrationToleranceList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>IntellectualLevel </span><span asp-validation-for="IntellectualLevel" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.IntellectualLevelArray).BindTo(LookupMan.GetIntellectualLevelList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Intellectual Function </span><span asp-validation-for="IntellectualFunction" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.IntellectualFunctionArray).BindTo(LookupMan.GetIntellectualFunctionList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Mood </span><span asp-validation-for="Mood" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.MoodArray).BindTo(LookupMan.GetMoodList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Self Soothing Capacity </span><span asp-validation-for="SelfSoothingCapacity" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.SelfSoothingCapacityArray).BindTo(LookupMan.GetSelfSoothingCapacityList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Sensory Cognition </span><span asp-validation-for="SensoryCognition" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.SensoryCognitionArray).BindTo(LookupMan.GetSensoryCognitionList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Sensory Integration </span><span asp-validation-for="SensoryIntegration" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.SensoryIntegrationArray).BindTo(LookupMan.GetSensoryIntegrationList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Transitions </span><span asp-validation-for="Transitions" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.TransitionsArray).BindTo(LookupMan.GetTransitionsList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Cognition and Thought</strong></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-9">
+                <span>Associations </span><span asp-validation-for=Associations class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.AssociationsArray).BindTo(LookupMan.GetAssociationsList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Delusions </span><span asp-validation-for=Delusions class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.DelusionsArray).BindTo(LookupMan.GetDelusionsList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Hallucinations </span><span asp-validation-for="Hallucinations" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.HallucinationsArray).BindTo(LookupMan.GetHallucinationsList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Insight </span><span asp-validation-for="Insight" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.InsightArray).BindTo(LookupMan.GetInsightList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Judgement </span><span asp-validation-for="Judgement" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.JudgementArray).BindTo(LookupMan.GetJudgementList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Memory </span><span asp-validation-for="Memory" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.MemoryArray).BindTo(LookupMan.GetMemoryList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Phobia </span><span asp-validation-for="Phobia" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.PhobiaArray).BindTo(LookupMan.GetPhobiaList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Orientation </span><span asp-validation-for="Orientation" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.OrientationArray).BindTo(LookupMan.GetOrientationList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Future Orient </span><span asp-validation-for="FutureOrient" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.FutureOrientArray).BindTo(LookupMan.GetFutureOrientList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Thought Content </span><span asp-validation-for="ThoughtContent" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.ThoughtContentArray).BindTo(LookupMan.GetThoughtContentList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Thought Process </span><span asp-validation-for="ThoughtProcess" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.ThoughtProcessArray).BindTo(LookupMan.GetThoughtProcessList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Communication</strong></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-9">
+                <span>Expressive Language </span><span asp-validation-for="ExpressiveLanguage" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.ExpressiveLanguageArray).BindTo(LookupMan.GetExpressiveLanguageList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>General Knowledge </span><span asp-validation-for="GeneralKnowledge" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.GeneralKnowledgeArray).BindTo(LookupMan.GetGeneralKnowledgeList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Receptive Language </span><span asp-validation-for="ReceptiveLanguage" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.ReceptiveLanguageArray).BindTo(LookupMan.GetReceptiveLanguageList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Speech </span><span asp-validation-for="Speech" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.SpeechArray).BindTo(LookupMan.GetSpeechList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Patterns</strong></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-9">
+                <span>Eating Patterns </span><span asp-validation-for="EatingPatterns" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.EatingPatternsArray).BindTo(LookupMan.GetEatingPatternsList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Sleep Patterns </span><span asp-validation-for="SleepPatterns" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.SleepPatternsArray).BindTo(LookupMan.GetSleepPatternsList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Unusual Behavior Pattern</span><span asp-validation-for="UnusualBehaviorPattern" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.UnusualBehaviorPatternArray).BindTo(LookupMan.GetUnusualBehaviorPatternsList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Risk</strong></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-9">
+                <span>Degree Of Risk </span><span asp-validation-for="DegreeOfRisk" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.DegreeOfRiskArray).BindTo(LookupMan.GetDegreeOfRiskList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Self Harm </span><span asp-validation-for="SelfHarm" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.SelfHarmArray).BindTo(LookupMan.GetSelfHarmList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Other Harm </span><span asp-validation-for="OtherHarm" class="text-danger"></span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.OtherHarmArray).BindTo(LookupMan.GetOtherHarmList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Impulse Control </span><span asp-validation-for="ImpulseControl" class="text-danger">
+                </span>@(Html.Kendo().MultiSelectFor(Model => Model.ImpulseControlArray).BindTo(LookupMan.GetImpulseControlList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Suicide </span><span asp-validation-for="Suicide" class="text-danger">
+                </span>@(Html.Kendo().MultiSelectFor(Model => Model.SuicideArray).BindTo(LookupMan.GetSuicideList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Dsm Diagnosis</span><span asp-validation-for="DsmDiagnosis" class="text-danger"></span>
+                <textarea asp-for="DsmDiagnosis" class="form-control" style="height:100px"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <span>Date Clinitian Signed On</span><span asp-validation-for="DateClinitianSignedOn" class="text-danger"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="DateClinitianSignedOn" class="form-control" style='width: 100%;' />
+            </div>
+            <div class="col-md-3">
+                <span>Date Supervisor Signed On</span><span asp-validation-for="DateSupervisorSignedOn" class="text-danger"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="DateSupervisorSignedOn" class="form-control" style='width: 100%;' />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div> &nbsp;</div>
+                <label class="control-checkbox">
+                    <span>Mark as completed. (And lock this Assessment as Read Only)</span>
+                    <input type="checkbox" />
+                    <div class="checkbox-label"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" asp-for="RecordedBy" value="@User.Identity.Name" />
+    <input type="hidden" asp-for="RecordedOn" value="@System.DateTime.Now" />
+</div>

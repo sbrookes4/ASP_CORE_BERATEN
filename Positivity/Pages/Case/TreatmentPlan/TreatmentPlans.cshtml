@@ -1,0 +1,60 @@
+﻿@page "{CaseIntakeId}"
+
+@model Positivity.Pages.Case.TreatmentPlan.TreatmentPlansModel
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "TreatmentPlans", CaseId = Model.CaseIntakeId }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = Model.CaseIntakeId })
+
+@Html.Partial("Common/_PageTitlePartial", "Treatment Plans")
+
+@{ViewData["Title"] = "TreatmentPlans";}
+
+<div class="panel panel-info">
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Plan Date</th>
+                    <th>Plan Name</th>
+                    <th>Date Client Signed</th>
+                    <th>Date Supervisor Signed</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var plan in Model.TreatmentPlanList)
+                    {
+                <tr>
+                    <td>@plan.PlanDate.ToString("MMM-dd-yyyy")</td>
+                    <td width="300">@plan.PlanName</td>
+                    <td>
+                        @if (plan.DateClientSigned.HasValue)
+                        {
+                            @plan.DateClientSigned.Value.ToString("MMM-dd-yyyy")
+                        }
+                    </td>
+                    <td>
+                        @if (plan.DateSupervisorSigned.HasValue)
+                        {
+                            @plan.DateSupervisorSigned.Value.ToString("MMM-dd-yyyy")
+                        }
+                    </td>
+                    <td><a href='@Navigator.UpdateTreatmentPlan/@plan.Id' class="btn btn-xs btn-greenTwo"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
+
+                    <td><a href='@Navigator.ViewTreatmentPlan/@plan.Id' class="btn btn-xs btn-blueThree"><span class="glyphicon"></span> View</a></td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <hr />
+        <div class="col-md-4">
+            <a href='@Navigator.CreateTreatmentPlan/@Model.CaseIntakeId' class="btn btn-sm btn-greenOne">
+                <span class="glyphicon glyphicon-plus"></span>
+                Add New Treatment
+            </a>
+        </div>
+    </div>
+</div>

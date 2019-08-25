@@ -1,0 +1,83 @@
+﻿@page "{progressNoteId}"
+@model Positivity.Pages.Case.ProgressNote.ViewProgressNoteModel
+
+@{ViewData["Title"] = "View Progress Notes";}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "", CaseId = 1 }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = 1 })
+
+@Html.Partial("Common/_PageTitlePartial", "View Progress Note")
+
+
+<div class="panel panel-body">
+
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Date of Service</label>
+            <p>@Model.ProgressNoteData.DateOfService</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Time of Service</label>
+            <p>@Model.ProgressNoteData.TimeOfService</p>
+
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Service Location</label>
+            <p>@Model.ProgressNoteData.ServiceLocationDesc</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Treatement Modality</label>
+            <p>@Model.ProgressNoteData.TreatmentModalityDesc</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Service Location</label>
+            <p>@Model.ProgressNoteData.ServiceLocationDesc</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Contact Method</label>
+            <p>@Model.ProgressNoteData.ContactMethodDesc</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-9">
+
+            <label>Narrative</label>
+            <p>@Model.ProgressNoteData.Narrative</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+
+
+</div>

@@ -1,0 +1,231 @@
+﻿@page
+@model Positivity.Pages.Case.ViewCaseIntakeModel
+
+@{ViewData["Title"] = "View Case Intake";}
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_CaseMenuPartial", new MenuModel { Identifier = "", CaseId = 1 }); }}
+
+@await Component.InvokeAsync("CaseInfoHeader", new { caseIntakeId = 1 })
+
+@Html.Partial("Common/_PageTitlePartial", "View Case Intake")
+
+<div class="panel panel-body">
+
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Case Intake Date</label>
+            <p></p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Case Intake Time</label>
+            <p>TEST</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Level of Urgency</label>
+            <p>TEST</p>
+
+        </div>
+
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Intake Method</label>
+            <p>TEST</p>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Case Name</label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Presenting Problems</label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Abuse</label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Abuse Description</label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Prior Service Description</label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Prior Hospitalization Description</label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Prior Medical Conditions And Treatments Description</label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>
+                Current Living Situation And Family Relations
+            </label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>
+                Case Formulation
+            </label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>
+                Dsm Diagnosis
+            </label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>
+                First Disposition
+            </label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>
+                Referral Source
+            </label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>
+                Referral Contact Name
+            </label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+    <!--START ROW -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>
+                Referral Reason
+            </label>
+            <p>TEST</p>
+
+        </div>
+
+    </div>
+    <!--END ROW -->
+
+</div>

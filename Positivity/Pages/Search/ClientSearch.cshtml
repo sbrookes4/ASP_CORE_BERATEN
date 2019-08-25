@@ -1,0 +1,76 @@
+﻿@page
+@model Positivity.Pages.Search.ClientSearchModel
+
+@{ViewData["Title"] = "Clients Search";}
+
+@Html.Partial("Common/_PageTitlePartial", "Clients Search")
+
+@Html.Partial("_SearchMenuPartial", new MenuModel { Identifier = "ClientSearch" })
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_DashboardMenuPartial", new MenuModel { Identifier = "Dashboard" }); }}
+
+<form method="post">
+    <div class="panel panel-info">
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <span>Client Medical Record</span><span asp-validation-for="SearchData.MedicalRecordNumber"></span>
+                    <input type="text" asp-for="SearchData.MedicalRecordNumber" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span>First Name</span><span asp-validation-for="SearchData.FirstName"></span>
+                    <input type="text" asp-for="SearchData.FirstName" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span>Last Name</span><span asp-validation-for="SearchData.LastName"></span>
+                    <input type="text" asp-for="SearchData.LastName" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <span>Date of Birth</span><span asp-validation-for="SearchData.DateOfBirth"></span>
+                    <kendo-datepicker max="@DateTime.Now" for="SearchData.DateOfBirth" class="form-control" style='width: 100%;' />
+                </div>
+                <div class="col-md-1">
+                    <div>&nbsp;</div>
+                    <input type="submit" value="Search" class="btn btn-blackTwo pull-right" />
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                TIP: By Clicking on "Search Button" without any filter parameters, you can get the top 10 results
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (Model.ClientList?.Count == 0)
+{
+    <div class="col-md-12">
+        <strong>No Records Returned. Please change the search criteria and try again.</strong>
+    </div>
+}
+else if (Model.ClientList?.Count > 0)
+{
+    <div class="panel panel-info">
+        <div class="panel-body" style="padding:0px;">
+            @(Html.Kendo().Grid(Model.ClientList)
+                                        .Name("ClientSearchGrid")
+                                        .Columns(columns =>
+                                        {
+                                            columns.Bound(c => c.MedicalRecordNumber).Title("Medical Record #").Width(200).HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                            columns.Bound(c => c.Name).Title("Name").Width(500).HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                            columns.Bound(c => c.DateOfBirth).Title("Date Of Birth").ClientTemplate("#=kendo.toString(DateOfBirth,'MMM-dd-yyyy')#").Width(300).HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                            columns.Bound(c => c.Gender).Title("Gender").Width(200).HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                            columns.Bound(c => c.Race).Title("Race").Width(400).HeaderHtmlAttributes(new { @style = "font-weight:bold;" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains)));
+                                            columns.Template("<a class='btn btn-blueThree btn-xs' href='" + Navigator.ClientDetails + "/#: Id#'>View</a>");
+                                        })
+
+                                        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                                        .Sortable()
+                                        .Pageable(pageable => pageable.ButtonCount(10))
+            )
+        </div>
+    </div>
+}
+
+@section Scripts {@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }}

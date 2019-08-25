@@ -1,0 +1,159 @@
+﻿@model CaseIntake
+@inject BeratenHealthcareDataInterfaceLib.ILookup LookupMan
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ClientId" />
+        <input type="hidden" asp-for="CaseNumber" />
+        <div class="row">
+            <div class="col-md-3">
+                <span>Case Intake Date</span><span asp-validation-for="IntakeDate" class="text-danger"></span>
+                <kendo-datepicker max="@TimeZoneUtility.DateTimeNow" for="IntakeDate" class="form-control" style='width: 100%;' />
+            </div>
+            <div class="col-md-3">
+                <span>Case Intake Time</span><span asp-validation-for="IntakeTime" class="text-danger"></span>
+                <kendo-timepicker for="IntakeTime" class="form-control" style='width: 100%;' />
+            </div>
+            <div class="col-md-3">
+                <span>Level of Urgency</span><span asp-validation-for="UrgencyLevelLookupId"></span>
+                <select asp-for="UrgencyLevelLookupId" class="form-control"
+                        asp-items="@LookupMan.GetUngencyLevlList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <span>Intake Method</span><span asp-validation-for="IntakeMethodLookupId"></span>
+                <select asp-for="IntakeMethodLookupId" class="form-control"
+                        asp-items="@LookupMan.GetIntakeMethodList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})">
+                    <option></option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <span>Case Name</span><span asp-validation-for="CaseName" class="text-danger"></span>
+                <input type="text" asp-for="CaseName" class="form-control" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-9">
+                <span>Presenting Problems</span>
+                @(Html.Kendo().MultiSelectFor(Model => Model.PresentingProblemsArray).BindTo(LookupMan.GetPresentingProblemsList().Select(x => x.Description).ToList()).Filter(FilterType.Contains))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <span>Abuse</span><span asp-validation-for="AbuseLookupId"></span>
+                <select asp-for="AbuseLookupId" class="form-control"
+                        asp-items="@LookupMan.GetAbuseList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Abuse Description</span><span asp-validation-for="AbuseDesc"></span>
+                <textarea asp-for="AbuseDesc" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Prior Services Description</span><span asp-validation-for="PriorServicesDesc"></span>
+                <textarea asp-for="PriorServicesDesc" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Prior Hospitalization Description</span><span asp-validation-for="PriorHospitalizationDesc"></span>
+                <textarea asp-for="PriorHospitalizationDesc" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Prior Medical Conditions And Treatments Description</span><span asp-validation-for="PriorMedicalConditionsAndTreatmentsDesc"></span>
+                <textarea asp-for="PriorMedicalConditionsAndTreatmentsDesc" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Current Living Situation And Family Relations</span><span asp-validation-for="CurrentLivingSituationAndFamilyRelations"></span>
+                <textarea asp-for="CurrentLivingSituationAndFamilyRelations" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Case Formulation</span><span asp-validation-for="CaseFormulation"></span>
+                <textarea asp-for="CaseFormulation" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <span>Dsm Diagnosis</span><span asp-validation-for="DsmDiagnosis"></span>
+                <textarea asp-for="DsmDiagnosis" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <span>First Disposition </span><span asp-validation-for="FirstDispositionLookupId"></span>
+                <select asp-for="FirstDispositionLookupId" class="form-control"
+                        asp-items="@LookupMan.GetFirstDispositionList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <span>Referral Source</span><span asp-validation-for="ReferralSourceLookupId"></span>
+                <select asp-for="ReferralSourceLookupId" class="form-control" onchange="referralSourceCanged(this)"
+                        asp-items="@LookupMan.GetReferralSourceList().Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString()})">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div id="ReferralInfo">
+            <div class="row">
+                <div class="col-md-9">
+                    <span>Referral Contact Name </span><span asp-validation-for="ReferralContactName" class="text-danger"></span>
+                    <input type="text" asp-for="ReferralContactName" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <span>Referral Reason</span><span asp-validation-for="ReferralReason" class="text-danger"></span>
+                    <textarea asp-for="ReferralReason" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div> &nbsp;</div>
+                <label class="control-checkbox">
+                    <span>Mark as completed. (And lock this Intake as Read Only)</span>
+                    <input type="checkbox" asp-for="IsCompleted" />
+                    <div class="checkbox-label"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" asp-for="RecordedBy" value="@User.Identity.Name" />
+    <input type="hidden" asp-for="RecordedOn" value="@System.DateTime.Now" />
+</div>
+
+<script>
+    referralSourceCanged(document.getElementById('ReferralSourceLookupId'));
+    function referralSourceCanged(referralSource) {
+        if (referralSource.value > 0) {
+            document.getElementById('ReferralInfo').style.display = 'block';
+        } else {
+            document.getElementById('ReferralInfo').style.display = 'none';
+        }
+    }
+</script>

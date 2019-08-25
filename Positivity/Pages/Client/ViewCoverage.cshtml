@@ -1,0 +1,224 @@
+﻿@page
+@model Positivity.Pages.Client.ViewCoverageModel
+
+@section SideMenu {@{ await Html.RenderPartialAsync("Common/_DashboardMenuPartial", new MenuModel { Identifier = "" }); }}
+
+@{ViewBag.Title = "View Coverage";}
+
+@Html.Partial("Common/_PageTitlePartial", "View Coverage")
+
+<div class="panel panel-body">
+
+    <!--START TITLE-->
+    <div class="row">
+
+        <div class="col-md-12">
+            <h3>General Information</h3>
+        </div>
+
+    </div>
+    <!--END TITLE-->
+    <!--START ROW-->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Coverage Type</label>
+            <p>@Model.CoverageData.CoverageType</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Coverage Rank</label>
+            <p>@Model.CoverageData.CoverageRank</p>
+
+        </div>
+
+    </div>
+    <!-- END ROW-->
+    <!--START ROW-->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Effective From</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Effective Until</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+    </div>
+    <!-- END ROW-->
+    <!--START ROW-->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Plan Name</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <label>Group Number</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <label>Member Number</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+    </div>
+    <!-- END ROW-->
+    <!--START ROW-->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>CoPay Amount</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <label>Contracted Insurer Rate</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <label>Prior Authorization Number</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+
+    </div>
+    <!-- END ROW-->
+    <!--START ROW-->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Plan Subscriber Employer</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Insurance Notes</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+    </div>
+    <!-- END ROW-->
+    <!--START TITLE-->
+    <div class="row">
+
+        <div class="col-md-12">
+            <h3>Medicaid Information</h3>
+        </div>
+
+    </div>
+    <!--END TITLE-->
+    <!--START ROW-->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Medicaid Number</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Medicaid Worker</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Medicaid Phone Number</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+    </div>
+    <!-- END ROW-->
+    <!--START ROW-->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Medicaid Eligibiltiy Notes</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+    </div>
+    <!-- END ROW-->
+    <!--START TITLE-->
+    <div class="row">
+
+        <div class="col-md-12">
+            <h3>Medicare Information</h3>
+        </div>
+
+    </div>
+    <!--END TITLE-->
+
+    <!--START ROW-->
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <label>Medicare Number</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Medicare Phone Number</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+    </div>
+    <!-- END ROW-->
+    <!--START ROW-->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Medicare Notes</label>
+            <p>LOREM IPSUM</p>
+
+        </div>
+
+    </div>
+    <!-- END ROW-->
+
+
+
+</div>
+

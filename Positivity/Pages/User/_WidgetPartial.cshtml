@@ -1,0 +1,19 @@
+﻿@model Widget
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Add a New Widget to User</strong></div>
+    <div class="panel-body">
+        <input type="hidden" asp-for="UserId" />
+        <div class="row">
+            <div class="col-md-4">
+                <span>Widget</span>
+                <select asp-for="WidgetComponentId" asp-items="Html.GetEnumSelectList<WidgetComponents>()" class="form-control"></select>
+            </div>
+            <div class="col-md-4">
+                <span>Widget Order</span>
+                <input type="number" asp-for="WidgetOrder" class="form-control" />
+            </div>
+        </div>
+    </div>
+</div>

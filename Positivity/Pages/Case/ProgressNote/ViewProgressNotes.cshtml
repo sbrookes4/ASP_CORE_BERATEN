@@ -1,0 +1,85 @@
+﻿@page "{CaseIntakeId}"
+
+@model Positivity.Pages.Case.ProgressNote.ViewProgressNotesModel
+
+@{Layout = null;}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Behavioral Health Case Notes</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
+</head>
+
+<body style="height: auto !important;">
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="content-wrapper">
+
+                @if (Model.ProgressNoteList.Count < 1)
+                { return; }
+
+                @foreach (var caseNote in Model.ProgressNoteList)
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Date: @caseNote.DateTimeFormat</strong></div>
+                        <div class="panel-body">
+                            <table class="table table-bordered">
+                                <tbody>
+
+                                    <tr>
+                                        <th width="150">Contact Method</th>
+                                        <td>
+                                            @caseNote.ContactMethodDesc
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Location</th>
+                                        <td>
+                                            @caseNote.ServiceLocationDesc
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Treatment Modality</th>
+                                        <td>
+                                            @caseNote.TreatmentModalityDesc
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Notes</th>
+                                        <td>
+                                            @Html.Raw(caseNote.Narrative)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Last Modified</th>
+                                        <td>
+                                            @caseNote.AuditInfo
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/PdfExport.js"></script>
+
+    <style>
+        .content-wrapper {
+            display: table-cell;
+            vertical-align: top;
+        }
+    </style>
+</body>
+</html>
